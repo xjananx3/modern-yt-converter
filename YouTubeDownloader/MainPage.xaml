@@ -1,0 +1,75 @@
+﻿<Page x:Class="YouTubeDownloader.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:YouTubeDownloader"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      xmlns:um="using:Uno.Material"
+      Background="{ThemeResource BackgroundBrush}">
+ <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Textfeld für den YouTube-Link -->
+        <TextBox Name="YouTubeLinkTextBox" Grid.Row="0" Margin="0,0,0,10"
+                 Height="30" FontSize="16" VerticalAlignment="Center"
+                 HorizontalAlignment="Center" Width="400"
+                 PlaceholderText="Enter YouTube link here"/>
+
+        <!-- Speicherordner auswählen -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox Name="FolderPathTextBox" Width="300" Height="30"
+                     VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0"
+                     IsReadOnly="True"/>
+            <Button Name="BrowseButton" Content="Browse" Width="100" Height="30"
+                    VerticalAlignment="Center" Click="BrowseButton_Click"/>
+        </StackPanel>
+
+        <!-- Auswahl zwischen Audio- und Videoformaten -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+            <RadioButton Name="AudioFormatRadioButton" Content="Audio" IsChecked="True"
+                         FontSize="16" Margin="0,0,20,0"/>
+            <ComboBox Name="AudioFormatComboBox" Width="100" Height="30"
+                      VerticalAlignment="Center" FontSize="16">
+                <ComboBoxItem Content="MP3"/>
+                <ComboBoxItem Content="OPUS"/>
+                <ComboBoxItem Content="FLAC"/>
+                <ComboBoxItem Content="M4B"/>
+            </ComboBox>
+
+            <RadioButton Name="VideoFormatRadioButton" Content="Video"
+                         FontSize="16" Margin="40,0,20,0"/>
+            <ComboBox Name="VideoFormatComboBox" Width="100" Height="30"
+                      VerticalAlignment="Center" FontSize="16" IsEnabled="False">
+                <ComboBoxItem Content="MP4"/>
+                <ComboBoxItem Content="AVI"/>
+                <ComboBoxItem Content="WMV"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Bitrate-Auswahl -->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Bitrate:" VerticalAlignment="Center" FontSize="16"
+                       Margin="0,0,10,0"/>
+            <ComboBox Name="BitrateComboBox" Width="120" Height="30"
+                      VerticalAlignment="Center" FontSize="16">
+                <ComboBoxItem Content="128 kbps"/>
+                <ComboBoxItem Content="192 kbps"/>
+                <ComboBoxItem Content="256 kbps"/>
+                <ComboBoxItem Content="320 kbps"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Download Button -->
+        <Button Name="DownloadButton" Content="Download" Grid.Row="4"
+                Width="120" Height="40" VerticalAlignment="Center"
+                HorizontalAlignment="Center" Click="DownloadButton_Click"/>
+    </Grid>
+</Page>
