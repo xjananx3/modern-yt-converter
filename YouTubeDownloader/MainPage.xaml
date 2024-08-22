@@ -37,10 +37,8 @@
                          FontSize="16" Margin="0,0,20,0"/>
             <ComboBox Name="AudioFormatComboBox" Width="100" Height="30"
                       VerticalAlignment="Center" FontSize="16">
-                <ComboBoxItem Content="MP3"/>
                 <ComboBoxItem Content="OPUS"/>
-                <ComboBoxItem Content="FLAC"/>
-                <ComboBoxItem Content="M4B"/>
+                <ComboBoxItem Content="M4A"/>
             </ComboBox>
 
             <RadioButton Name="VideoFormatRadioButton" Content="Video"
@@ -48,8 +46,7 @@
             <ComboBox Name="VideoFormatComboBox" Width="100" Height="30"
                       VerticalAlignment="Center" FontSize="16" IsEnabled="False">
                 <ComboBoxItem Content="MP4"/>
-                <ComboBoxItem Content="AVI"/>
-                <ComboBoxItem Content="WMV"/>
+                <ComboBoxItem Content="webm"/>
             </ComboBox>
         </StackPanel>
 
