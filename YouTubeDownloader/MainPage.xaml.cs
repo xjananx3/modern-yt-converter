@@ -53,11 +53,12 @@ public sealed partial class MainPage : Page
     private string GetArguments()
     {
         string folderArg = @"-o ";
-        string fileTypeArg = @" -x -f bestaudio ";
+        string filename = @"%(title)s.%(ext)s ";
+        string fileTypeArg = @"-x -f bestaudio ";
         string url = YouTubeLinkTextBox.Text;
 
 
-        string arguments = folderArg + FolderPathTextBox.Text + fileTypeArg + url;
+        string arguments = folderArg + FolderPathTextBox.Text + filename + fileTypeArg + url;
         return arguments;
     }
 }

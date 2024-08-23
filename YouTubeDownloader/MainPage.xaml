@@ -26,7 +26,7 @@
             <TextBox Name="FolderPathTextBox" Width="300" Height="30"
                      VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0"
                      IsReadOnly="True"/>
-            <Button Name="BrowseButton" Content="Browse" Width="100" Height="30"
+            <Button x:Name="BrowseButton" Content="Browse" Width="100" Height="30"
                     VerticalAlignment="Center" Click="BrowseButton_Click"/>
         </StackPanel>
 
