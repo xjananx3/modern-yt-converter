@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!-- Textfeld für den YouTube-Link -->
-        <TextBox Name="YouTubeLinkTextBox" Grid.Row="0" Margin="0,0,0,10"
+        <TextBox x:Name="YouTubeLinkTextBox" Grid.Row="0" Margin="0,0,0,10"
                  Height="30" FontSize="16" VerticalAlignment="Center"
                  HorizontalAlignment="Center" Width="400"
                  PlaceholderText="Enter YouTube link here"/>
@@ -23,7 +23,7 @@
         <!-- Speicherordner auswählen -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBox Name="FolderPathTextBox" Width="300" Height="30"
+            <TextBox x:Name="FolderPathTextBox" Width="300" Height="30"
                      VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0"
                      IsReadOnly="True"/>
             <Button x:Name="BrowseButton" Content="Browse" Width="100" Height="30"
@@ -57,10 +57,9 @@
                        Margin="0,0,10,0"/>
             <ComboBox Name="BitrateComboBox" Width="120" Height="30"
                       VerticalAlignment="Center" FontSize="16">
-                <ComboBoxItem Content="128 kbps"/>
-                <ComboBoxItem Content="192 kbps"/>
-                <ComboBoxItem Content="256 kbps"/>
-                <ComboBoxItem Content="320 kbps"/>
+                <ComboBoxItem Content="Niedrig"/>
+                <ComboBoxItem Content="Mittel"/>
+                <ComboBoxItem Content="Hoch"/>
             </ComboBox>
         </StackPanel>
 
