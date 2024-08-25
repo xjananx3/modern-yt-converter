@@ -54,11 +54,41 @@ public sealed partial class MainPage : Page
     {
         string folderArg = @"-o ";
         string filename = @"%(title)s.%(ext)s ";
-        string fileTypeArg = @"-x -f bestaudio ";
         string url = YouTubeLinkTextBox.Text;
+
+        string fileTypeArg = AudioFormatRadioButton.IsChecked == true ? GetAudioArguments() : GetVideoArguments();
 
 
         string arguments = folderArg + FolderPathTextBox.Text + filename + fileTypeArg + url;
         return arguments;
+    }
+
+    private string GetAudioArguments()
+    {
+        string format = ((ComboBoxItem)AudioFormatComboBox.SelectedItem).Content.ToString().ToLower();
+        
+        return $"-x --audio-format {format} ";
+    }
+
+    private string GetVideoArguments()
+    {
+        string quality = GetQualityArgument();
+
+        return $"-f '{quality}' ";
+    }
+    
+    
+
+    private string GetQualityArgument()
+    {
+        string quality = ((ComboBoxItem)BitrateComboBox.SelectedItem).Content.ToString();
+        
+        return quality switch
+        {
+            "480p" => "best[height<=480]",
+            "720p" => "best[height<=720]",
+            "1080p" => "-best[height<=1080]",
+            _ => ""
+        };
     }
 }
