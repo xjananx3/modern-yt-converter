@@ -8,9 +8,11 @@ namespace YouTubeDownloader;
 public sealed partial class MainPage : Page
 {
     private readonly FileProvider _fileProvider = new();
+    private readonly DownloadManager _downloadManager;
     public MainPage()
     {
         this.InitializeComponent();
+        _downloadManager = new DownloadManager();
     }
 
     private async void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -21,34 +23,17 @@ public sealed partial class MainPage : Page
 
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
     {
-        await StartDownload();
-    }
-
-    private async Task StartDownload()
-    {
         var arguments = GetArguments();
-        await DownloadFileProcess(arguments);
-    }
-
-    private async Task DownloadFileProcess(string arguments)
-    {
-        Process ffmProcess = new Process();
-        ffmProcess.StartInfo.FileName = "yt-dlp";
-        ffmProcess.StartInfo.Arguments = arguments;
-        ffmProcess.StartInfo.CreateNoWindow = true;
-        ffmProcess.StartInfo.RedirectStandardError = true;
-        ffmProcess.StartInfo.UseShellExecute = false;
-        ffmProcess.EnableRaisingEvents = true;
         
-        ffmProcess.Start();
-
-        ffmProcess.BeginErrorReadLine();
-        ffmProcess.BeginOutputReadLine();
-        await ffmProcess.WaitForExitAsync();
-
-        ffmProcess.Close();
+        try
+        {
+            await _downloadManager.StartDownloadAsync(arguments);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
-    
 
     private string GetArguments()
     {
@@ -76,8 +61,6 @@ public sealed partial class MainPage : Page
 
         return $"-f {quality} ";
     }
-    
-    
 
     private string GetQualityArgument()
     {
@@ -88,6 +71,7 @@ public sealed partial class MainPage : Page
             "480p" => "bestvideo[height<=480]+bestaudio/best[height<=480]",
             "720p" => "bestvideo[height<=720]+bestaudio/best[height<=720]",
             "1080p" => "bestvideo[height<=1080]+bestaudio/best[height<=1080]",
+            "Best" => "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
             _ => ""
         };
     }
