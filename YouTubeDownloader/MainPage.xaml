@@ -37,16 +37,16 @@
                          FontSize="16" Margin="0,0,20,0"/>
             <ComboBox Name="AudioFormatComboBox" Width="100" Height="30"
                       VerticalAlignment="Center" FontSize="16">
-                <ComboBoxItem Content="OPUS"/>
-                <ComboBoxItem Content="M4A"/>
+                <ComboBoxItem Content="opus"/>
+                <ComboBoxItem Content="mp3"/>
+                <ComboBoxItem Content="m4a"/>
             </ComboBox>
 
             <RadioButton Name="VideoFormatRadioButton" Content="Video"
                          FontSize="16" Margin="40,0,20,0"/>
             <ComboBox Name="VideoFormatComboBox" Width="100" Height="30"
                       VerticalAlignment="Center" FontSize="16" IsEnabled="False">
-                <ComboBoxItem Content="MP4"/>
-                <ComboBoxItem Content="webm"/>
+                <ComboBoxItem Content="mp4"/>
             </ComboBox>
         </StackPanel>
 
@@ -57,9 +57,9 @@
                        Margin="0,0,10,0"/>
             <ComboBox Name="BitrateComboBox" Width="120" Height="30"
                       VerticalAlignment="Center" FontSize="16">
-                <ComboBoxItem Content="Niedrig"/>
-                <ComboBoxItem Content="Mittel"/>
-                <ComboBoxItem Content="Hoch"/>
+                <ComboBoxItem Content="480p"/>
+                <ComboBoxItem Content="720p"/>
+                <ComboBoxItem Content="1080p"/>
             </ComboBox>
         </StackPanel>
 

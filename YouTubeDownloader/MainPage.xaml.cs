@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using Windows.Services.Maps.OfflineMaps;
-using YouTubeDownloader.Assets;
+using YouTubeDownloader;
 
 namespace YouTubeDownloader;
 
