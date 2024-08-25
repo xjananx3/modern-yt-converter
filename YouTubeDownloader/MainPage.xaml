@@ -44,24 +44,15 @@
 
             <RadioButton Name="VideoFormatRadioButton" Content="Video"
                          FontSize="16" Margin="40,0,20,0"/>
-            <ComboBox Name="VideoFormatComboBox" Width="100" Height="30"
-                      VerticalAlignment="Center" FontSize="16" IsEnabled="False">
-                <ComboBoxItem Content="mp4"/>
-            </ComboBox>
-        </StackPanel>
-
-        <!-- Bitrate-Auswahl -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10"
-                    VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Bitrate:" VerticalAlignment="Center" FontSize="16"
-                       Margin="0,0,10,0"/>
-            <ComboBox Name="BitrateComboBox" Width="120" Height="30"
-                      VerticalAlignment="Center" FontSize="16">
+            <ComboBox Name="QualityComboBox" Width="100" Height="30"
+                      VerticalAlignment="Center" FontSize="16" IsEnabled="True">
                 <ComboBoxItem Content="480p"/>
                 <ComboBoxItem Content="720p"/>
                 <ComboBoxItem Content="1080p"/>
+                <ComboBoxItem Content="Best"/>
             </ComboBox>
         </StackPanel>
+
 
         <!-- Download Button -->
         <Button Name="DownloadButton" Content="Download" Grid.Row="4"
