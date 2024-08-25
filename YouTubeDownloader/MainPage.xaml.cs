@@ -53,7 +53,7 @@ public sealed partial class MainPage : Page
     private string GetArguments()
     {
         string folderArg = @"-o ";
-        string filename = @"%(title)s.%(ext)s ";
+        string filename = @"/%(title)s.%(ext)s ";
         string url = YouTubeLinkTextBox.Text;
 
         string fileTypeArg = AudioFormatRadioButton.IsChecked == true ? GetAudioArguments() : GetVideoArguments();
@@ -65,7 +65,7 @@ public sealed partial class MainPage : Page
 
     private string GetAudioArguments()
     {
-        string format = ((ComboBoxItem)AudioFormatComboBox.SelectedItem).Content.ToString().ToLower();
+        string format = ((ComboBoxItem)AudioFormatComboBox.SelectedItem).Content.ToString()!.ToLower();
         
         return $"-x --audio-format {format} ";
     }
@@ -74,20 +74,20 @@ public sealed partial class MainPage : Page
     {
         string quality = GetQualityArgument();
 
-        return $"-f '{quality}' ";
+        return $"-f {quality} ";
     }
     
     
 
     private string GetQualityArgument()
     {
-        string quality = ((ComboBoxItem)BitrateComboBox.SelectedItem).Content.ToString();
+        string quality = ((ComboBoxItem)QualityComboBox.SelectedItem).Content.ToString()!;
         
         return quality switch
         {
-            "480p" => "best[height<=480]",
-            "720p" => "best[height<=720]",
-            "1080p" => "-best[height<=1080]",
+            "480p" => "bestvideo[height<=480]+bestaudio/best[height<=480]",
+            "720p" => "bestvideo[height<=720]+bestaudio/best[height<=720]",
+            "1080p" => "bestvideo[height<=1080]+bestaudio/best[height<=1080]",
             _ => ""
         };
     }
