@@ -4,22 +4,28 @@ namespace YouTubeDownloader;
 
 public class DownloadManager
 {
-    public async Task StartDownloadAsync(string arguments)
+    public async Task StartDownloadAsync(string arguments, CancellationToken cancellationToken)
     {
-        Process ffmProcess = new Process();
-        ffmProcess.StartInfo.FileName = "yt-dlp";
-        ffmProcess.StartInfo.Arguments = arguments;
-        ffmProcess.StartInfo.CreateNoWindow = true;
-        ffmProcess.StartInfo.RedirectStandardError = true;
-        ffmProcess.StartInfo.UseShellExecute = false;
-        ffmProcess.EnableRaisingEvents = true;
         
-        ffmProcess.Start();
+        using var process = new Process();
+        process.StartInfo = new ProcessStartInfo
+        {
+            FileName = "yt-dlp",
+            Arguments = arguments,
+            CreateNoWindow = true,
+            RedirectStandardError = true,
+            UseShellExecute = false
+        };
+        process.EnableRaisingEvents = true;
 
-        ffmProcess.BeginErrorReadLine();
-        ffmProcess.BeginOutputReadLine();
-        await ffmProcess.WaitForExitAsync();
+        process.Start();
+        await process.WaitForExitAsync(cancellationToken);
 
-        ffmProcess.Close();
+        if (cancellationToken.IsCancellationRequested)
+        {
+            process.Kill(true);
+            cancellationToken.ThrowIfCancellationRequested();
+        }
+        
     }
 }
