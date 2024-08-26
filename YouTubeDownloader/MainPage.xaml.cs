@@ -9,6 +9,7 @@ public sealed partial class MainPage : Page
 {
     private readonly FileProvider _fileProvider = new();
     private readonly DownloadManager _downloadManager;
+    private CancellationTokenSource _cancellationTokenSource;
     public MainPage()
     {
         this.InitializeComponent();
@@ -23,15 +24,32 @@ public sealed partial class MainPage : Page
 
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
     {
-        var arguments = GetArguments();
+        _cancellationTokenSource = new CancellationTokenSource();
+        DownloadProgressBar.Visibility = Visibility.Visible;
+        CancelButton.Visibility = Visibility.Visible;
+        DownloadButton.Visibility = Visibility.Collapsed;
+        StatusLabel.Text = "Downloading...";
         
+        var arguments = GetArguments();
+
         try
         {
-            await _downloadManager.StartDownloadAsync(arguments);
+            await _downloadManager.StartDownloadAsync(arguments, _cancellationTokenSource.Token);
+            StatusLabel.Text = "Download finished";
+        }
+        catch (OperationCanceledException)
+        {
+            StatusLabel.Text = "Download canceled";
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            DownloadProgressBar.Visibility = Visibility.Collapsed;
+            CancelButton.IsEnabled = false;
+            DownloadButton.IsEnabled = true;
         }
     }
 
@@ -74,5 +92,10 @@ public sealed partial class MainPage : Page
             "Best" => "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
             _ => ""
         };
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        _cancellationTokenSource?.Cancel();
     }
 }
