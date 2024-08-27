@@ -10,6 +10,7 @@ public sealed partial class MainPage : Page
     private readonly FileProvider _fileProvider = new();
     private readonly DownloadManager _downloadManager;
     private CancellationTokenSource _cancellationTokenSource;
+    
     public MainPage()
     {
         this.InitializeComponent();
