@@ -85,15 +85,31 @@ public sealed partial class MainPage : Page
     private string GetQualityArgument()
     {
         string quality = ((ComboBoxItem)QualityComboBox.SelectedItem).Content.ToString()!;
+        string extension = GetVideoExtension();
+        string videoAudioExtension = GetVideoAudioExtension();
         
         return quality switch
         {
-            "480p" => "bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]/best[ext=mp4][height<=480]",
-            "720p" => "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4][height<=720]",
-            "1080p" => "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4][height<=1080]",
-            "Best" => "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+            "480p" => $"bestvideo{extension}[height<=480]+bestaudio{videoAudioExtension}/best{extension}[height<=480]",
+            "720p" => $"bestvideo{extension}[height<=720]+bestaudio{videoAudioExtension}/best{extension}[height<=720]",
+            "1080p" => $"bestvideo{extension}[height<=1080]+bestaudio{videoAudioExtension}/best{extension}[height<=1080]",
+            "Best" => $"bestvideo{extension}+bestaudio{videoAudioExtension}/best{extension}/best",
             _ => ""
         };
+    }
+
+    private string GetVideoExtension()
+    {
+        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked;
+        
+        return isWebMFormat ? "" : "[ext=mp4]";
+    }
+
+    private string GetVideoAudioExtension()
+    {
+        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked;
+        
+        return isWebMFormat ? "" : "[ext=m4a]";
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
