@@ -1,6 +1,6 @@
 # 🎥 YouTube Downloader
 
-A simple, modern and powerful YouTube Downloader built with WPF/XAML and .NET that allows you to download videos and audios in various formats and qualities. The application supports multiple audio and video formats and provides a user-friendly interface.
+A simple, modern and powerful YouTube Downloader built with XAML and C# on Uno Platform that allows you to download videos and audios in various formats and qualities. The application supports multiple audio and video formats and provides a user-friendly interface.
 
 ## 🚀 Features
 
@@ -14,7 +14,7 @@ A simple, modern and powerful YouTube Downloader built with WPF/XAML and .NET th
 ### Prerequisites
 
 - .NET 8
-- Arch Linux (or any other distribution that supports Skia and WinUI)
+- Linux (e.g. Ubuntu, Arch, Debian or any other distribution that supports Skia and WinUI)
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - [FFmpeg](https://ffmpeg.org/)
 
@@ -46,7 +46,8 @@ dotnet run
 
 ## 🧩 Technologies
 - **.NET 8**
-- **WPF/XAML**
+- **XAML**
+- **Uno Platform** (https://platform.uno/)
 - **yt-dlp**: Used for downloading and converting YouTube videos and audios.
 - **FFmpeg**: Required for processing and converting audio files.
 - **Skia**: Used for the graphical interface on Linux.
