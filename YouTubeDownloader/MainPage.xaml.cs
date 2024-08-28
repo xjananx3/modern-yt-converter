@@ -51,6 +51,7 @@ public sealed partial class MainPage : Page
             DownloadProgressBar.Visibility = Visibility.Collapsed;
             CancelButton.IsEnabled = false;
             DownloadButton.IsEnabled = true;
+            DownloadButton.Visibility = Visibility.Visible;
         }
     }
 
