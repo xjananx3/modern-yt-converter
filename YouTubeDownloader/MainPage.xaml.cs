@@ -88,9 +88,9 @@ public sealed partial class MainPage : Page
         
         return quality switch
         {
-            "480p" => "bestvideo[height<=480]+bestaudio/best[height<=480]",
-            "720p" => "bestvideo[height<=720]+bestaudio/best[height<=720]",
-            "1080p" => "bestvideo[height<=1080]+bestaudio/best[height<=1080]",
+            "480p" => "bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]/best[ext=mp4][height<=480]",
+            "720p" => "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4][height<=720]",
+            "1080p" => "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4][height<=1080]",
             "Best" => "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
             _ => ""
         };
