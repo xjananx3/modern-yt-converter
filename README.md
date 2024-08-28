@@ -51,7 +51,7 @@ dotnet run
 - **FFmpeg**: Required for processing and converting audio files.
 - **Skia**: Used for the graphical interface on Linux.
 
-##🛡️ License
+## 🛡️ License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## 🙏 Acknowledgements
