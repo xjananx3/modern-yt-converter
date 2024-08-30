@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using Windows.Services.Maps.OfflineMaps;
-using YouTubeDownloader;
 
 namespace YouTubeDownloader;
 
@@ -20,7 +16,8 @@ public sealed partial class MainPage : Page
     private async void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
         var folderPath = await _fileProvider.ChooseDownloadFolderAsync();
-        FolderPathTextBox.Text = folderPath;
+
+        FolderPathTextBox.Text = !string.IsNullOrWhiteSpace(folderPath) ? folderPath : "Path could not be retrieved.";
     }
 
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
@@ -58,28 +55,41 @@ public sealed partial class MainPage : Page
     private string GetArguments()
     {
         string folderArg = @"-o ";
-        string filename = @"/%(title)s.%(ext)s ";
+        string folderPath = FormatPath(FolderPathTextBox.Text);
+        string fullPath = $@"""{folderPath}/%(title)s.%(ext)s""";
         string url = YouTubeLinkTextBox.Text;
 
         string fileTypeArg = AudioFormatRadioButton.IsChecked == true ? GetAudioArguments() : GetVideoArguments();
 
-
-        string arguments = folderArg + FolderPathTextBox.Text + filename + fileTypeArg + url;
+        string arguments = folderArg + fullPath + fileTypeArg + url;
         return arguments;
+    }
+
+    private string FormatPath(string text)
+    {
+        if (text.Contains("%20"))
+        {
+            string decodedPath = text.Replace("%20", @" ");
+            return decodedPath;
+        }
+        else
+        {
+            return text;
+        }
     }
 
     private string GetAudioArguments()
     {
         string format = ((ComboBoxItem)AudioFormatComboBox.SelectedItem).Content.ToString()!.ToLower();
         
-        return $"-x --audio-format {format} ";
+        return $" -x --audio-format {format} ";
     }
 
     private string GetVideoArguments()
     {
         string quality = GetQualityArgument();
 
-        return $"-f {quality} ";
+        return $" -f {quality} ";
     }
 
     private string GetQualityArgument()
@@ -100,13 +110,13 @@ public sealed partial class MainPage : Page
 
     private string GetVideoExtension()
     {
-        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked;
+        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked!;
         return isWebMFormat ? "" : "[ext=mp4]";
     }
 
     private string GetVideoAudioExtension()
     {
-        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked;
+        bool isWebMFormat = (bool)WebMFormatCheckBox.IsChecked!;
         return isWebMFormat ? "" : "[ext=m4a]";
     }
 
